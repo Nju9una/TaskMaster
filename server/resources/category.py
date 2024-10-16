@@ -23,9 +23,13 @@ class CategoryResource(Resource):
         # Extract name from request body
         data = request.get_json()
         new_category = Category(name=data['name'])
-        db.session.add(new_category)
-        db.session.commit()
-        return new_category.to_dict(), 201
+        try:
+            db.session.add(new_category)
+            db.session.commit()
+            return new_category.to_dict(), 201
+        except Exception as e:
+            db.session.rollback()  # Rollback in case of error
+            return {'error': str(e)}, 400
 
     # PUT method to update an existing category by id
     def put(self, id):
@@ -35,8 +39,12 @@ class CategoryResource(Resource):
             # Update the category's name with the new data
             data = request.get_json()
             category.name = data['name']
-            db.session.commit()
-            return category.to_dict(), 200
+            try:
+                db.session.commit()
+                return category.to_dict(), 200
+            except Exception as e:
+                db.session.rollback()  # Rollback in case of error
+                return {'error': str(e)}, 400
         return {'error': 'Category not found'}, 404
 
     # DELETE method to remove a category by id

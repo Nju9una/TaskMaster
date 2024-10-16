@@ -30,9 +30,13 @@ class TaskResource(Resource):
             user_id=data['user_id'],
             project_id=data['project_id']
         )
-        db.session.add(new_task)
-        db.session.commit()
-        return new_task.to_dict(), 201
+        try:
+            db.session.add(new_task)
+            db.session.commit()
+            return new_task.to_dict(), 201
+        except Exception as e:
+            db.session.rollback()  # Rollback in case of error
+            return {'error': str(e)}, 400
 
     # PUT method to update an existing task by id
     def put(self, id):
@@ -45,8 +49,12 @@ class TaskResource(Resource):
             task.description = data['description']
             task.status = data['status']
             task.due_date = data['due_date']
-            db.session.commit()
-            return task.to_dict(), 200
+            try:
+                db.session.commit()
+                return task.to_dict(), 200
+            except Exception as e:
+                db.session.rollback()  # Rollback in case of error
+                return {'error': str(e)}, 400
         return {'error': 'Task not found'}, 404
 
     # DELETE method to remove a task by id

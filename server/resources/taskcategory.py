@@ -27,9 +27,13 @@ class TaskCategoryResource(Resource):
             category_id=data['category_id'],
             priority=data.get('priority', 'normal')  # Default priority is 'normal'
         )
-        db.session.add(new_task_category)
-        db.session.commit()
-        return new_task_category.to_dict(), 201
+        try:
+            db.session.add(new_task_category)
+            db.session.commit()
+            return new_task_category.to_dict(), 201
+        except Exception as e:
+            db.session.rollback()  # Rollback the session in case of error
+            return {'error': str(e)}, 400
 
     # DELETE method to remove a task-category relationship by id
     def delete(self, id):
@@ -40,4 +44,3 @@ class TaskCategoryResource(Resource):
             db.session.commit()
             return {'message': 'TaskCategory deleted'}, 200
         return {'error': 'TaskCategory not found'}, 404
-
