@@ -15,6 +15,9 @@ class User(db.Model, SerializerMixin):
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
 
+    # serialization 
+    serialize_rules = ('-password',)
+
     # Relationships
     projects = db.relationship('Project', back_populates="user")
     tasks = db.relationship('Task', back_populates="user")  # Changed from users to user
