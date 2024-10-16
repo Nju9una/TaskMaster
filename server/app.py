@@ -1,10 +1,13 @@
 from flask import Flask
 from flask_migrate import Migrate 
 from flask_restful import Resource, Api
+
+
 from models import db
 from resources.category import CategoryResource
 from resources.task import TaskResource
 from resources.taskcategory import TaskCategoryResource
+from resources.project import ProjectResource
 
 # Flask instance 
 app = Flask(__name__)
@@ -24,6 +27,7 @@ api = Api(app)
 api.add_resource(CategoryResource, '/categories', '/categories/<int:id>')
 api.add_resource(TaskResource, '/tasks', '/tasks/<int:id>')
 api.add_resource(TaskCategoryResource, '/taskcategories', '/taskcategories/<int:id>')
+api.add_resource(ProjectResource, '/projects', '/projects/<int:id>')
 
 @app.route('/')
 def index():
