@@ -11,9 +11,9 @@ class ProjectResource(Resource):
                 return project.to_dict(), 200
                 return {'error': 'Project not found'}, 404
 
-            else:
-                projects = Project.query.all()
-                return [project.to_dict() for project in projects], 200
+        
+            projects = Project.query.all()
+            return [project.to_dict() for project in projects], 200
 
     def post(self):
 
