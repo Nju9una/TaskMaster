@@ -2,6 +2,7 @@
 // src/components/TaskItem.js
 // src/components/TaskItem.js
 import React from 'react';
+import '../App.css';
 
 const TaskItem = ({ task }) => {
   return (

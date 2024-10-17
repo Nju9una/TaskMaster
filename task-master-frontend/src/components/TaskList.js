@@ -3,6 +3,8 @@
 // src/components/TaskList.js
 import React from 'react';
 import TaskItem from './TaskItem';
+import '../App.css'; 
+
 
 const TaskList = () => {
   // set task data
