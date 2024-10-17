@@ -1,23 +1,23 @@
-import React from "react";
-import { NavLink} from "react-router-dom";
+// src/components/Navbar.js
+import React from 'react';
+import { Link } from 'react-router-dom';
 
+const Navbar = () => {
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/projects">Projects</Link>
+        </li>
+        <li>
+          <Link to="/tasks">Tasks</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
-const NavBar = () => {
-    return (
-        <>
-        <header>
-            <nav>
-                <NavLink to ='/home'>Home</NavLink>
-                <NavLink to ='/tasks'>Tasks</NavLink>
-                <NavLink to ='/projects'>Projects</NavLink>
-                <NavLink to ='/profile'>Profile</NavLink>
-                <NavLink to ='/contact'>Contact</NavLink>
-                <NavLink to ='/login'>Login</NavLink>
-                
-            </nav>
-        </header>
-        </>
-    )
-}
-
-export default NavBar;
+export default Navbar;
