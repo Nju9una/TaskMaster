@@ -1,61 +1,77 @@
-import React, { useState } from 'react';
+import { Label, TextInput} from 'flowbite-react'
 import './LoginPage.css';
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast'
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate()
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    fetch('http://localhost:5000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+  const formik = useFormik({
+    validationSchema: Yup.object().shape({
+      email: Yup.string().required('Email is required'),
+      password: Yup.string().required('Password is required')
+    }),
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: async (values) => {
+
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        }
+      );
+
+      const data = await res.json();
+
+      if(data?.access_token){
+        toast.success(data.message);
+
+        localStorage.setItem('session', JSON.stringify(data));
+
+        navigate('/home')
+
+      } else {
+        toast.error(data.message);
       }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Login successful:', data);
-      localStorage.setItem('token', data.token); // Assuming your backend returns a token
-      // Redirect or update UI as needed
-    })
-    .catch((error) => {
-      console.error('Error logging in:', error);
-      alert('Login failed. Please try again.');
-    });
-  };
-
+    },
+  });
+ console.log(formik.errors)
   return (
     <div>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form onSubmit={formik.handleSubmit}>
+        <Label>
           Email:
-          <input 
+          <TextInput 
             type="email" 
             name="email" 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)} 
-            required 
+            onChange={formik.handleChange} 
+            value={formik.values.email}
+            helperText = {formik.errors.email}
+            color={formik.errors.email ? 'failure' : undefined} 
           />
-        </label>
+        </Label>
         <br />
-        <label>
+        <Label>
           Password:
-          <input 
+          <TextInput 
             type="password" 
             name="password" 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
+            onChange = {formik.handleChange}
+            value={formik.values.password}
+            helperText={formik.errors.password}
+            color={formik.errors.password ? 'failure' : undefined}
           />
-        </label>
+        </Label>
         <br />
         <button type="submit">Login</button>
       </form>

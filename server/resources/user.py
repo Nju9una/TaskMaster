@@ -2,6 +2,7 @@ from flask_restful import Resource
 from flask import request
 from flask_bcrypt import generate_password_hash, check_password_hash
 from models import User, db
+from flask_jwt_extended import create_access_token
 
 class UserResource(Resource):
     # create user
@@ -30,8 +31,13 @@ class UserResource(Resource):
         db.session.commit()
 
         # jwt
+        access_token = create_access_token(identity = user.id)
         
-        return new_user.to_dict(), 201
+        return {
+            "message": "User created successsfully",
+            "user": new_user.to_dict(),
+            "access_token": access_token
+            }
       
 class LoginResource(Resource):
     def post(self):
@@ -48,9 +54,13 @@ class LoginResource(Resource):
         # checks if the generated password matches 
         if check_password_hash(user.password,data['password']):
 
+            #jwt 
+            access_token = create_access_token(identity = user.id)
+
             return {
                 "message": "Login successful",
-                "user": user.to_dict() 
+                "user": user.to_dict(),
+                "access_token": access_token 
             }
         
         return {

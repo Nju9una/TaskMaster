@@ -1,10 +1,11 @@
-export default {
-  contet: [
-    "./index.html",
-    "./src/**/*.{js,jsx,ts,tsx}", 
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}", // Adjust this based on your file structure
+    "./node_modules/flowbite/**/*.js",
   ],
   theme: {
-    extend: {}, 
+    extend: {},
   },
-  plugins: [],
+  plugins: [require("flowbite/plugin")],
 };
+
