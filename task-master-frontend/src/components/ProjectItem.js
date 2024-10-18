@@ -2,7 +2,7 @@
 // src/components/ProjectItem.js
 import React from 'react';
 import TaskItem from './TaskItem';
-import 'src/App.css';
+// import 'src/App.css';
 
 
 const ProjectItem = ({ project }) => {
