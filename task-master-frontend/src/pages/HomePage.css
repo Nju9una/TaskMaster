@@ -1,13 +1,36 @@
-.home-container {
-  height: 100vh; 
-  width: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #0c141f; 
-  text-align: center; 
-  padding: 50px;
+/* src/components/Home.module.css */
+
+.container {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 2rem auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
 
+.nav {
+    margin-top: 1rem;
+}
+
+.link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.link:hover {
+    background-color: #007bff;
+    color: white;
+}
