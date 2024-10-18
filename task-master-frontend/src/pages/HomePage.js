@@ -1,6 +1,7 @@
 // src/components/HomePage.js
 import React, { useState } from 'react';
 import { Home, CheckSquare, FolderKanban, UserCircle, LogIn } from 'lucide-react';
+import './HomePage.css';
 
 const NavBar = () => {
   const [activePage, setActivePage] = useState('home');
