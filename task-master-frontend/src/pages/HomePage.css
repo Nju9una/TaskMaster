@@ -1,0 +1,13 @@
+.home-container {
+  height: 100vh; 
+  width: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #0c141f; 
+  text-align: center; 
+  padding: 50px;
+}
+
+

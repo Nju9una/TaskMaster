@@ -1,5 +1,5 @@
 body {
-  background-color: #f1bf1a;  /* Light background color */
+  background-color: #1f2937;  /* Light background color */
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,43 +19,57 @@ body {
 h1 {
   text-align: center;
   margin: 20px 0;
-  color: hsl(2, 89%, 51%);
+  color: #e49f17;;
 }
 
 /* Task and Project List Styles */
 ul {
-  list-style: none;
+  list-style: none;.home-container {
+    /* background: url('../images/homeimage.jpeg') no-repeat center center;
+    background-size: cover; */
+    height: 100vh; /* Full viewport height */
+    width: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* White text color */
+    text-align: center; /* Center text alignment */
+    padding: 50px;
+    /* margin: 0; */
+  }
+  
   padding: 0;
 }
 
 li {
-  background-color: #80dcec;
+  background-color: #e49f17;
   margin: 10px 0;
   padding: 30px;
   border-radius: 15px;
-  border: 2px solid #05469b;
+  border: 2px solid #8f5748;
 }
 
 h2 {
-  border-bottom: 2px solid hwb(224 2% 18%);
+  border-bottom: 5px solid hwb(224 2% 18%);
   padding-bottom: 20px;
   margin-bottom: 20px;
-  color: hsl(2, 89%, 51%);
+  color: hsl(0, 28%, 92%);
 }
 
 /* Task Item Styles */
 h3 {
   margin: 0;
-  color: #202221;
+  color: #21995d;
 }
 
 p {
   margin: 30px 0;
-  color: #161414;
+  color: #130e0e;
 }
 
 li h3 {
-  color: #151516;
+  color: #141413;
 }
 
 li p {
@@ -68,7 +82,7 @@ li p {
 }
 
 .App-header {
-  background-color: #1250cc;
+  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -78,10 +92,19 @@ li p {
   color: white;
 }
 
+
+.home-heading {
+  font-size: 3rem;
+  margin-bottom: 30px;
+  font-family: 'Arial', sans-serif;
+}
+
 .App-link {
-  color: #1d83a0;
+  color: #9c3b3b;
 }
 
 .body{
-background-color: #1d83a0;
+background-color: #24241e;
 }
+
+ 

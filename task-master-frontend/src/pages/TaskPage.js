@@ -1,6 +1,6 @@
 // src/components/TaskPage.js
 import React from 'react';
-import TaskList from './TaskList';
+import TaskList from '../components/TaskList';
 
 const TaskPage = () => {
   return (
