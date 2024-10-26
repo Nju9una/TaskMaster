@@ -31,7 +31,7 @@ class UserResource(Resource):
         db.session.commit()
 
         # jwt
-        access_token = create_access_token(identity = user.id)
+        access_token = create_access_token(identity = new_user.id)
         
         return {
             "message": "User created successsfully",
@@ -67,5 +67,13 @@ class LoginResource(Resource):
             "message": "Invalid email/password"
         }, 401
 
+class LogoutResource(Resource):
+    def delete(self):
+
+            if session['user_id']:
+                session['user_id'] = None
+                return {}, 204
+            return {'error': 'Unauthorized'}, 401
+   
 
         

@@ -15,6 +15,14 @@ class User(db.Model, SerializerMixin):
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'email': self.email,
+            'password': self.password,
+        }
+
     # serialization 
     serialize_rules = ('-password',)
 
@@ -37,10 +45,17 @@ class Project(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', back_populates="projects")
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'user_id': self.user_id,
+        }
+
     # Relationship with Task
     tasks = db.relationship('Task', back_populates="project")  # Changed from task to tasks
 
-    created_at = db.Column(db.TIMESTAMP)
 
     def __repr__(self):
         return f'<Project {self.name}, {self.description}>'
@@ -54,6 +69,17 @@ class Task(db.Model, SerializerMixin):
     description = db.Column(db.Text, nullable=False)
     status = db.Column(db.Text, nullable=False)
     due_date = db.Column(db.DateTime)  # Ensure this is correctly set to DateTime
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'status': self.status,
+            'due_date': str(self.due_date),
+            'user_id': self.user_id,
+            'project_id': self.project_id,
+        }
 
     # Relationships
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

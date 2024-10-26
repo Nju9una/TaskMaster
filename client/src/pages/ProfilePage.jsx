@@ -2,20 +2,16 @@ import  { useState } from 'react';
 import TaskList from '../components/TaskList';
 import ProjectList from '../components/ProjectList';
 import {  CheckCircle, PlusCircle, TrendingUp } from 'lucide-react';
-const ProfilePage = () => {
 
+const ProfilePage = ({user}) => {
   
-    const [user] = useState({
-    name: "John Doe",
-    email: "john.doe@example.com",
-    role: "Project Manager",
-    joinDate: "2024-01-15",
-    tasksCompleted: 45,
-    activeProjects: 3,
-    completionRate: 94
-  });
 
   const [activeTab, setActiveTab] = useState('overview');
+
+
+  if (!user) {
+    return <h1>Loading...</h1>
+  }
 
   const renderContent = () => {
     switch (activeTab) {
@@ -79,6 +75,7 @@ const ProfilePage = () => {
     }
   };
 
+
   return (
       <div className='min-h-screen bg-gray-100 pt-20 px-4 sm:px-6 lg:px-8'>
     <div className="mt-14 max-w-6xl mx-auto px-4"> 
@@ -90,8 +87,7 @@ const ProfilePage = () => {
         <div className="profile-details">
           <h1 className="text-3xl font-bold text-gray-800">{user.name}</h1>
           <p className="text-gray-500">{user.email}</p>
-          <p className="text-gray-500">Role: {user.role}</p>
-          <p className="text-gray-500">Member since: {user.joinDate}</p>
+          <p className="text-gray-500">Role: member</p>
         </div>
       </div>
 
