@@ -48,7 +48,7 @@ api.add_resource(CategoryResource, '/categories', '/categories/<int:id>')
 api.add_resource(TaskResource, '/tasks', '/tasks/<int:id>')
 api.add_resource(TaskCategoryResource, '/taskcategories', '/taskcategories/<int:id>')
 api.add_resource(ProjectResource, '/projects', '/projects/<int:id>')
-api.add_resource(UserResource, '/users')
+api.add_resource(UserResource, '/signup')
 api.add_resource(LoginResource, '/login')
 
 @app.route('/')

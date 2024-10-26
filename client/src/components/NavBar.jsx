@@ -1,17 +1,16 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, CheckSquare, FolderKanban, UserCircle, LogIn, UserPlus } from 'lucide-react'; 
+import { Home, CheckSquare, FolderKanban, UserCircle, LogIn, LogOut} from 'lucide-react'; 
 
-const NavBar = () => {
+const NavBar = ({session, onLogout}) => {
   const location = useLocation();
 
   const navItems = [
     { id: 'home', icon: Home, label: 'Home', path: '/' },
     { id: 'tasks', icon: CheckSquare, label: 'Tasks', path: '/tasks' },
     { id: 'projects', icon: FolderKanban, label: 'Projects', path: '/projects' },
-    { id: 'profile', icon: UserCircle, label: 'Profile', path: '/profile' },
-    { id: 'login', icon: LogIn, label: 'Login', path: '/login' },
-    { id: 'signup', icon: UserPlus, label: 'Sign Up', path: '/signup' }
+    { id: 'profile', icon: UserCircle, label: 'Profile', path: '/profile' }
+    // { id: 'login', icon: LogIn, label: 'Login', path: '/login' }
   ];
 
   return (
@@ -37,6 +36,17 @@ const NavBar = () => {
                 </Link>
               );
             })}
+            {session ? (
+              <button onClick={onLogout} className='flex items-center space-x-2 text-sm font-medium text-gray-600 hover:text-green-600'>
+                <LogIn className='w-5 h-5'/>
+                <span>Logout</span>
+              </button>
+            ) : (
+              <Link to="/login" className='flex items-center space-x-2 text-sm font-medium text-gray-600 hover:text-green-600'>
+                <LogOut className='w-5 h-5'/>
+                <span>Login</span>
+              </Link>
+            )}
           </div>
         </div>
       </nav>
